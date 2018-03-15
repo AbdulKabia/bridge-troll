@@ -3,6 +3,7 @@
 const geo = require('./geo');
 const map = require('./map');
 const log = require('./log');
+const timeofday = require('./timeofday');
 const svgMarker = require('./svg-marker');
 
 const Bridge = require('./bridge');
@@ -46,6 +47,9 @@ map.on('update', bounds => {
 geo.once('position', (lat, lng) => {
   // Load a map, centered on our current position
   map.init(lat, lng);
+
+  // Set current time to decide appropriate theme
+  timeofday.calculateCurrentTime(lat, lng);
 
   // Stop showing the startup spinner now that map is drawn
   log.info('Removing loading spinner');

@@ -4,6 +4,7 @@
 
 const leaflet = require('leaflet');
 const fs = require('fs');
+const timeofday = require('./timeofday.js');
 
 /**
  * Given SVG content generate a data URL. If you're not familiar with
@@ -16,36 +17,55 @@ const generateSvgUrl = svg => {
 
 // Read contents of SVG files from bundle
 const locationSvg = fs.readFileSync(
-  __dirname + '/../icons/material-icons/location.svg'
+  __dirname + `/../icons/material-icons/location.svg`
 );
 const lockedSvg = fs.readFileSync(
-  __dirname + '/../icons/material-icons/locked.svg'
+  __dirname + `/../icons/material-icons/locked.svg`
 );
 const unlockedSvg = fs.readFileSync(
-  __dirname + '/../icons/material-icons/unlocked.svg'
+  __dirname + `/../icons/material-icons/unlocked.svg`
 );
 
+// White themed icons
+const locationSvgWhite = fs.readFileSync(
+  __dirname + '/../icons/material-icons/location-white.svg'
+);
+const lockedSvgWhite = fs.readFileSync(
+  __dirname + '/../icons/material-icons/locked-white.svg'
+);
+const unlockedSvgWhite = fs.readFileSync(
+  __dirname + '/../icons/material-icons/unlocked-white.svg'
+);
 
 // Generate Data URLs for each, so we can pass them to Leaflet below
 const locationUrl = generateSvgUrl(locationSvg);
 const lockedUrl = generateSvgUrl(lockedSvg);
 const unlockedUrl = generateSvgUrl(unlockedSvg);
+const locationUrlWhite = generateSvgUrl(locationSvgWhite);
+const lockedUrlWhite = generateSvgUrl(lockedSvgWhite);
+const unlockedUrlWhite = generateSvgUrl(unlockedSvgWhite);
 
 // All icons share the same size, define it once
 const iconSize = [25, 25];
 
+// Decide whether to use dark or light
+let locationIcon = locationUrlWhite, lockedIcon = lockedUrlWhite, unlockedIcon = unlockedUrlWhite;
+if (timeofday.isLight()) {
+  locationIcon = locationUrl, lockedIcon = lockedUrl, unlockedIcon = unlockedUrl;
+}
+
 // Expose custom Leaflet Icons to be used in our markers
 module.exports.location = leaflet.icon({
-  iconUrl: locationUrl,
+  iconUrl: locationIcon,
   iconSize
 });
 
 module.exports.locked = leaflet.icon({
-  iconUrl: lockedUrl,
+  iconUrl: lockedIcon,
   iconSize
 });
 
 module.exports.unlocked = leaflet.icon({
-  iconUrl: unlockedUrl,
+  iconUrl: unlockedIcon,
   iconSize
 });
