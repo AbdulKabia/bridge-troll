@@ -50,7 +50,8 @@ module.exports.init = (lat, lng) => {
   map.on('click', e => module.exports.emit('click', e));
   map.on('dblclick', e => module.exports.emit('dblclick', e));
 
-  let tileUrl = 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png';
+  // let tileUrl = 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png';
+  let tileUrl = 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png';
   leaflet.tileLayer(tileUrl, { attribution }).addTo(map);
 
   map.setView([lat, lng], zoomLevel);

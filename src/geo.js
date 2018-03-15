@@ -11,9 +11,9 @@ const GeoTree = require('geo-tree');
 const set = new GeoTree();
 
 // Allow manual override of the geolocation API.  Use FAKE_GEO=1
-if (process.env.FAKE_GEO == 1) {
+// if (process.env.FAKE_GEO == 1) {
   require('./fake-geolocation');
-}
+// }
 
 /**
  * Find all nearby points within a bounding box.  p1 and p2 should be diagonal
@@ -72,3 +72,7 @@ module.exports.watchPosition = () => {
  * Add a record to our quadtree set for this item.
  */
 module.exports.insert = (lat, lng, data) => set.insert(lat, lng, data);
+
+module.exports.getCurrentPosition = callback => {
+  navigator.geolocation.getCurrentPosition(callback);
+};

@@ -25,6 +25,7 @@ const unlockedSvg = fs.readFileSync(
   __dirname + '/../icons/material-icons/unlocked.svg'
 );
 
+
 // Generate Data URLs for each, so we can pass them to Leaflet below
 const locationUrl = generateSvgUrl(locationSvg);
 const lockedUrl = generateSvgUrl(lockedSvg);
