@@ -45,11 +45,13 @@ map.on('update', bounds => {
 
 // Wait until we know where we are, then show the map centred on that point
 geo.once('position', (lat, lng) => {
-  // Load a map, centered on our current position
-  map.init(lat, lng);
+
 
   // Set current time to decide appropriate theme
   timeofday.calculateCurrentTime(lat, lng);
+
+  // Load a map, centered on our current position
+  map.init(lat, lng);
 
   // Stop showing the startup spinner now that map is drawn
   log.info('Removing loading spinner');
