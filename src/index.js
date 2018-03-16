@@ -11,6 +11,7 @@ const bridges = {};
 
 // Listen for updates to the map's bounding box (viewable area)
 // and check for bridges within it that need to be shown.
+
 map.on('update', bounds => {
   let p1 = bounds._northEast;
   let p2 = bounds._southWest;
