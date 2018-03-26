@@ -54,6 +54,7 @@ module.exports.init = (lat, lng) => {
   let tileUrl = 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png';
   if(timeofday.isLight()) {
     tileUrl = 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png';
+    // svgMarker.init(true);
   }
   leaflet.tileLayer(tileUrl, { attribution }).addTo(map);
 

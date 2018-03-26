@@ -4,7 +4,7 @@
 
 const leaflet = require('leaflet');
 const fs = require('fs');
-// const timeofday = require('./timeofday.js');
+const timeofday = require('./timeofday.js');
 
 /**
  * Given SVG content generate a data URL. If you're not familiar with
@@ -47,11 +47,9 @@ const unlockedUrlWhite = generateSvgUrl(unlockedSvgWhite);
 
 // All icons share the same size, define it once
 const iconSize = [25, 25];
-
-let thereIsLight = false;
-module.exports.init = isThereLight => {
-  thereIsLight = isThereLight;
-}
+timeofday.calculateCurrentTime(39.913818, 116.363625);
+let thereIsLight = timeofday.isLight();
+// console.log(`There is light?: ${thereIsLight}`);
 
 // Expose custom Leaflet Icons to be used in our markers
 module.exports.location = leaflet.icon({

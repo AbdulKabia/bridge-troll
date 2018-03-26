@@ -47,7 +47,6 @@ map.on('update', bounds => {
 // Wait until we know where we are, then show the map centred on that point
 geo.once('position', (lat, lng) => {
 
-
   // Set current time to decide appropriate theme
   timeofday.calculateCurrentTime(lat, lng);
 
