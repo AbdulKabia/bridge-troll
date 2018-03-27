@@ -5,8 +5,9 @@ const svgMarker = require('../svg-marker');
 
 const leaflet = require('leaflet');
 const EventEmitter = require('events').EventEmitter;
+const timeofday = require('../timeofday.js');
 
-const tileUrl = 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png';
+const tileUrl = timeofday.isLight() ? 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png' : 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png';
 const attribution =
   '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
