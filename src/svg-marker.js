@@ -3,7 +3,6 @@
 // Using Material Icons as inline SVG - https://material.io/icons/
 
 const leaflet = require('leaflet');
-const timeofday = require('./timeofday.js');
 
 // Read contents of SVG files from bundle as Data URLs
 const locationSvgUrl = require('../icons/material-icons/location.svg');
@@ -19,16 +18,32 @@ const iconSize = [25, 25];
 
 // Expose custom Leaflet Icons to be used in our markers
 module.exports.location = leaflet.icon({
-  iconUrl: timeofday.isLight() ? locationSvgUrl : locationSvgWhite,
+  iconUrl: locationSvgUrl,
+  iconSize
+});
+
+// Expose custom Leaflet Icons to be used in our markers
+module.exports.locationWhite = leaflet.icon({
+  iconUrl: locationSvgWhite,
   iconSize
 });
 
 module.exports.locked = leaflet.icon({
-  iconUrl: timeofday.isLight() ? lockedSvgUrl : lockedSvgWhite,
+  iconUrl: lockedSvgUrl,
+  iconSize
+});
+
+module.exports.lockedWhite = leaflet.icon({
+  iconUrl: lockedSvgWhite,
   iconSize
 });
 
 module.exports.unlocked = leaflet.icon({
-  iconUrl: timeofday.isLight() ? unlockedSvgUrl : unlockedSvgWhite,
+  iconUrl: unlockedSvgUrl,
+  iconSize
+});
+
+module.exports.unlockedWhite = leaflet.icon({
+  iconUrl: unlockedSvgWhite,
   iconSize
 });

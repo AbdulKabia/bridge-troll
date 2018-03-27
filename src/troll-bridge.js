@@ -5,6 +5,7 @@ const log = require('./log');
 const map = require('./map');
 const svgMarker = require('./svg-marker');
 const db = require('./db');
+const timeofday = require('./timeofday.js');
 
 /**
  * A decorated Bridge type, with extra behaviour for interacting on the map.
@@ -70,16 +71,16 @@ class TrollBridge extends Bridge {
       .get(bridge.idbKey)
       .then(val => {
         if (val) {
-          addMarker(svgMarker.unlocked);
+          addMarker(timeofday.isLight() ? svgMarker.unlocked : svgMarker.unlockedWhite);
         } else {
-          addMarker(svgMarker.locked);
+          addMarker(timeofday.isLight() ? svgMarker.locked : svgMarker.lockedWhite);
         }
         callback(null);
       })
       .catch(err => {
         log.error(`Unable to read key '${bridge.idbkey}' from idb: ${err}`);
         // Default to locked so we at least show something
-        addMarker(svgMarker.locked);
+        addMarker(timeofday.isLight() ? svgMarker.locked : svgMarker.lockedWhite);
         callback(err);
       });
   }
@@ -99,7 +100,7 @@ class TrollBridge extends Bridge {
     db
       .set(bridge.idbKey, new Date())
       .then(() => {
-        bridge.marker.setIcon(svgMarker.unlocked);
+        bridge.marker.setIcon(timeofday.isLight() ? svgMarker.unlocked : svgMarker.unlockedWhite);
         log.info('Unlocked bridge', bridge);
         callback(null);
       })

@@ -7,7 +7,6 @@ const leaflet = require('leaflet');
 const EventEmitter = require('events').EventEmitter;
 const timeofday = require('../timeofday.js');
 
-const tileUrl = timeofday.isLight() ? 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png' : 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png';
 const attribution =
   '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
@@ -30,6 +29,7 @@ class BaseUI extends EventEmitter {
 
     // http://leafletjs.com/reference-1.3.0.html#map
     let map = (this.map = leaflet.map(mapEl, this.options));
+    let tileUrl = timeofday.isLight() ? 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png' : 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png';
     leaflet.tileLayer(tileUrl, { attribution }).addTo(map);
     map.setView([lat, lng], defaultZoomLevel);
 
@@ -42,7 +42,7 @@ class BaseUI extends EventEmitter {
     this.currentLocationMarker = leaflet
       .marker([lat, lng], {
         title: 'Current Location',
-        icon: svgMarker.location
+        icon: timeofday.isLight() ? svgMarker.location : svgMarker.locationWhite
       })
       .addTo(map);
 
