@@ -71,16 +71,22 @@ class TrollBridge extends Bridge {
       .get(bridge.idbKey)
       .then(val => {
         if (val) {
-          addMarker(timeofday.isLight() ? svgMarker.unlocked : svgMarker.unlockedWhite);
+          addMarker(
+            timeofday.isLight() ? svgMarker.unlocked : svgMarker.unlockedWhite
+          );
         } else {
-          addMarker(timeofday.isLight() ? svgMarker.locked : svgMarker.lockedWhite);
+          addMarker(
+            timeofday.isLight() ? svgMarker.locked : svgMarker.lockedWhite
+          );
         }
         callback(null);
       })
       .catch(err => {
         log.error(`Unable to read key '${bridge.idbkey}' from idb: ${err}`);
         // Default to locked so we at least show something
-        addMarker(timeofday.isLight() ? svgMarker.locked : svgMarker.lockedWhite);
+        addMarker(
+          timeofday.isLight() ? svgMarker.locked : svgMarker.lockedWhite
+        );
         callback(err);
       });
   }
@@ -100,7 +106,9 @@ class TrollBridge extends Bridge {
     db
       .set(bridge.idbKey, new Date())
       .then(() => {
-        bridge.marker.setIcon(timeofday.isLight() ? svgMarker.unlocked : svgMarker.unlockedWhite);
+        bridge.marker.setIcon(
+          timeofday.isLight() ? svgMarker.unlocked : svgMarker.unlockedWhite
+        );
         log.info('Unlocked bridge', bridge);
         callback(null);
       })

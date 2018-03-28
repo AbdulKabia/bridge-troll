@@ -29,7 +29,10 @@ class BaseUI extends EventEmitter {
 
     // http://leafletjs.com/reference-1.3.0.html#map
     let map = (this.map = leaflet.map(mapEl, this.options));
-    let tileUrl = timeofday.isLight() ? 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png' : 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png';
+    // We decide what map to use based on time of day
+    let tileUrl = timeofday.isLight()
+      ? 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'
+      : 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png';
     leaflet.tileLayer(tileUrl, { attribution }).addTo(map);
     map.setView([lat, lng], defaultZoomLevel);
 

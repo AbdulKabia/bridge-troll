@@ -9,6 +9,7 @@ const locationSvgUrl = require('../icons/material-icons/location.svg');
 const lockedSvgUrl = require('../icons/material-icons/locked.svg');
 const unlockedSvgUrl = require('../icons/material-icons/unlocked.svg');
 
+// Read white icons for when it's dark out
 const locationSvgWhite = require('../icons/material-icons/location-white.svg');
 const lockedSvgWhite = require('../icons/material-icons/locked-white.svg');
 const unlockedSvgWhite = require('../icons/material-icons/unlocked-white.svg');
